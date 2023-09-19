@@ -1,4 +1,202 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   height: 100%;
   width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  padding: 0 20px;
+}
+
+/* Classes applied to all buttons */
+.custom-button {
+  padding: 9px 15px;
+  border: none;
+  border-radius: 3px;
+  background: #58adb8;
+  color: #FFFFFF;
+  font-weight: 700;
+  opacity: 1;
+}
+
+.custom-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  color: #000000;
+}
+/*---*/
+
+
+#action-bar {
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+}
+
+#search-box {
+  width: 25%;
+  padding: 9px;
+  border: 2px solid #b1b1b1;
+  border-radius: 3px;
+}
+
+#add-button {
+  padding: 10px 15px 8px 30px;
+}
+
+#add-button:hover #add-icon svg path {
+  fill: #000000 !important;
+}
+
+#add-icon {
+  position: relative;
+}
+
+#add-icon svg {
+  position: absolute;
+  left: -20px;
+  top: -0.5px;
+}
+
+
+table,
+tr > * {
+  border: 2px solid #b1b1b1;
+  padding: 8px;
+}
+
+th {
+  text-align: left;
+}
+
+table {
+  margin-top: 10px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table .name {
+  width: 45%;
+}
+
+table .action {
+  color: #ff0000;
+  text-decoration: underline;
+}
+
+table .action:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+dialog {
+  width: 400px;
+  text-align: center;
+  border-color: #b1b1b1;
+}
+
+.dialog-title {
+  margin: 0;
+}
+
+.dialog-content {
+  padding: 20px 40px;
+}
+
+.confirm-button {
+  background: #D54747;
+}
+
+.input-box {
+  text-align: left;
+  padding: 10px;
+}
+
+.input-box label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.input-box input {
+  width: 100%;
+  display: block;
+  padding: 8px;
+  border: 2px solid #b1b1b1;
+  border-radius: 3px;
+}
+
+#add-box .dialog-title {
+  margin-bottom: 20px;
+  padding: 10px;
+  text-align: left;
+}
+
+#add-box .button-group {
+  margin: 20px;
+  text-align: right;
+}
+
+
+@media (max-width: 768px) {
+  dialog {
+    width: 350px;
+  }
+  #search-box {
+    width: 40%;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 14px;
+  }
+  body {
+    padding: 0 10px;
+  }
+  #search-box {
+    width: 75%;
+  }
+  #add-button {
+    width: 25%;
+    padding: 6px;
+  }
+  #add-icon {
+    display: none;
+  }
+  dialog {
+    width: 300px;
+  }
+  #add-box .dialog-title {
+    margin: 0;
+  }
+  #add-box .button-group {
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 325px) {
+  html {
+    font-size: 12px;
+  }
+  body {
+    padding: 0;
+  }
+  table .name {
+    width: 25%;
+  }
+  dialog {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 280px) {
+  td {
+    overflow-wrap: anywhere;
+  }
 }

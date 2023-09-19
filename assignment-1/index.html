@@ -8,7 +8,102 @@
   </head>
 
   <body>
-    Hello world
+    <header>
+      <h1>Bookstore</h1>
+    </header>
+    <hr />
+    <main>
+      <div id="action-bar">
+        <input type="search" placeholder="Search books" id="search-box">
+        <button class="custom-button" id="add-button">
+          <span id="add-icon">
+            <svg height="16" width="16" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-3.2 -3.2 38.40 38.40" xml:space="preserve" fill="#000000" stroke="#000000" stroke-width="0.00032">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <g>
+                  <g id="plus_x5F_alt">
+                    <path style="fill:#ffffff;" d="M16,0C7.164,0,0,7.164,0,16s7.164,16,16,16s16-7.164,16-16S24.836,0,16,0z M24,18h-6v6h-4v-6H8v-4 h6V8h4v6h6V18z">
+                    </path>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </span>
+          Add book
+        </button>
+      </div>
+      
+      <!-- Main table -->
+      <table>
+        <thead>
+          <tr>
+            <th class="name">Name</th>
+            <th>Author</th>
+            <th>Topic</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">Harry Potter</td>
+            <td>J.K.Rowling</td>
+            <td>Magic</td>
+            <td class="action">Delete</td>
+          </tr>
+          <tr>
+            <td class="name">The lord of the rings</td>
+            <td>J.R.R.Tolkien</td>
+            <td>Fantasy</td>
+            <td class="action">Delete</td>
+          </tr>
+          <tr>
+            <td class="name">Sans famille</td>
+            <td>Hector Malot</td>
+            <td>Adventure</td>
+            <td class="action">Delete</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Dialogs for certain actions -->
+      <section>
+        <dialog id="delete-box">
+          <h2 class="dialog-title">Delete book</h2>
+          <form>
+            <p class="dialog-content">Do you want to delete <b></b> book?</p>
+            <div class="button-group">
+              <button value="cancel" formmethod="dialog" class="custom-button">Cancel</button>
+              <button value="delete" formmethod="dialog" class="custom-button confirm-button">Delete</button>
+            </div>
+          </form>
+        </dialog>
+
+        <dialog id="add-box">
+          <h2 class="dialog-title">Add book</h2>
+          <form>
+            <div class="input-box">
+              <label for="name-input">Name</label>
+              <input type="text" id="name-input" placeholder="Enter book name">
+            </div>
+            <div class="input-box">
+              <label for="author-input">Author</label>
+              <input type="text" id="author-input" placeholder="Enter book author">
+            </div>
+            <div class="input-box">
+              <label for="topic-input">Topic</label>
+              <input type="text" id="topic-input" placeholder="Enter book topic">
+            </div>
+            
+            <div class="button-group">
+              <button value="cancel" formmethod="dialog" class="custom-button">Cancel</button>
+              <button value="create" formmethod="dialog" class="custom-button confirm-button">Create</button>
+            </div>
+          </form>
+        </dialog>
+      </section>
+    </main>
+    
     <script src="script.js"></script>
   </body>
 </html>
