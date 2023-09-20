@@ -14,8 +14,8 @@
     <hr />
     <main>
       <div id="action-bar">
-        <input type="search" placeholder="Search books" id="search-box">
-        <button class="custom-button" id="add-button">
+        <input type="search" placeholder="Search books" id="search-box" oninput="search()">
+        <button class="custom-button" id="add-button" onclick="showAddDialog()">
           <span id="add-icon">
             <svg height="16" width="16" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-3.2 -3.2 38.40 38.40" xml:space="preserve" fill="#000000" stroke="#000000" stroke-width="0.00032">
               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -45,24 +45,6 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="name">Harry Potter</td>
-            <td>J.K.Rowling</td>
-            <td>Magic</td>
-            <td class="action">Delete</td>
-          </tr>
-          <tr>
-            <td class="name">The lord of the rings</td>
-            <td>J.R.R.Tolkien</td>
-            <td>Fantasy</td>
-            <td class="action">Delete</td>
-          </tr>
-          <tr>
-            <td class="name">Sans famille</td>
-            <td>Hector Malot</td>
-            <td>Adventure</td>
-            <td class="action">Delete</td>
-          </tr>
         </tbody>
       </table>
       
@@ -74,7 +56,7 @@
             <p class="dialog-content">Do you want to delete <b></b> book?</p>
             <div class="button-group">
               <button value="cancel" formmethod="dialog" class="custom-button">Cancel</button>
-              <button value="delete" formmethod="dialog" class="custom-button confirm-button">Delete</button>
+              <button value="delete" formmethod="dialog" class="custom-button confirm-button" onclick="deleteBook()">Delete</button>
             </div>
           </form>
         </dialog>
@@ -96,8 +78,8 @@
             </div>
             
             <div class="button-group">
-              <button value="cancel" formmethod="dialog" class="custom-button">Cancel</button>
-              <button value="create" formmethod="dialog" class="custom-button confirm-button">Create</button>
+              <button value="cancel" formmethod="dialog" class="custom-button" onclick="closeAddDialog()">Cancel</button>
+              <button value="create" formmethod="dialog" class="custom-button confirm-button" onclick="addNewBook()">Create</button>
             </div>
           </form>
         </dialog>

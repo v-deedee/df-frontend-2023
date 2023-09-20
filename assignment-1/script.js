@@ -11,13 +11,70 @@ const table = document.querySelector("table");
 
 const deleteDialog = document.getElementById("delete-box");
 
+// Store element for deletion
 let deleteElement;
 
-let bookList = table.querySelectorAll("tbody tr");
+// Store a list of book for searching and displaying on screen
+let bookList;
 
+const sampleData = [
+    ["Harry Potter", "J.K.Rowling", "Magic"],
+    ["The lord of the rings", "J.R.R.Tolkien", "Fantasy"],
+    ["Sans famille", "Hector Malot", "Adventure"]
+];
 
-// Search event
-seachBox.addEventListener("input", () => {
+// Fill localStorage with sample data
+if (!localStorage.getItem("bookList")) {
+    localStorage.setItem("bookList", JSON.stringify(sampleData));
+}
+
+// A list for getting and setting items in localStorage
+let localData = JSON.parse(localStorage.getItem("bookList"));
+
+// Prevent closing dialog on pressing "Enter"
+document.querySelectorAll("form").forEach(f => {
+    f.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+        }
+    });
+});
+
+// Get data from localStorage and put into table
+window.addEventListener("load", () => {
+    table.querySelector("tbody").innerHTML = "";
+    localData.forEach(e => {
+        customInsertRow(e[0], e[1], e[2]);
+    });
+    bookList = table.querySelectorAll("tbody tr");
+});
+
+// Clear input box after successful insertion
+addBookDialog.addEventListener("close", () => {
+    if (addBookDialog.returnValue === "create") {
+        nameInput.value = "";
+        authorInput.value = "";
+        topicInput.value = "";
+    }
+});
+
+// Set event for "delete" action
+table.addEventListener("click", (e) => {
+    const clickElement = e.target;
+    if (clickElement.tagName === "TD" && clickElement.className === "action") {
+        deleteElement = clickElement.parentElement;
+        const bookName = deleteElement.querySelector(".name").textContent;
+        deleteDialog.showModal();
+        deleteDialog.querySelector(".dialog-content b").textContent = bookName;
+    }
+});
+
+/**
+ * Event handler function
+ */
+
+// Perform searching when users input keyword into search box
+function search() {
     const key = seachBox.value;
     if (key !== "") {
         bookList.forEach(book => {
@@ -33,84 +90,62 @@ seachBox.addEventListener("input", () => {
             book.style.display = "table-row";
         });
     }
-});
+};
 
-// Show dialog when user clicks "Add book" button
-addBookButton.addEventListener("click", () => {
+// Show "Add book" dialog when users click "Add book" button
+function showAddDialog() {
     addBookDialog.showModal();
     // Avoid blank input
     nameInput.required = true;
     authorInput.required = true;
     topicInput.required = true;
-});
+};
 
-// Prevent closing dialog on pressing "Enter"
-addBookDialog.querySelector("form").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        e.preventDefault();
-    }
-});
-
-// Prevent closing dialog on pressing "Enter"
-deleteDialog.querySelector("form").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        e.preventDefault();
-    }
-});
-
-// Insert new row to table
-addBookDialog.querySelector("[value='create']").addEventListener("click", () => {
-    if (nameInput.value !== "" && authorInput.value !== "" && topicInput.value !== "") {
-        let row = table.insertRow(-1);
-
-        let nameCell = row.insertCell(0);
-        let authorCell = row.insertCell(1);
-        let topicCell = row.insertCell(2);
-        let actionCell = row.insertCell(3);
-
-        nameCell.innerHTML = nameInput.value;
-        authorCell.innerHTML = authorInput.value;
-        topicCell.innerHTML = topicInput.value;
-        actionCell.innerHTML = "Delete";
-
-        nameCell.classList.add("name");
-        actionCell.classList.add("action");
-    }
-    // update list
-    bookList = table.querySelectorAll("tbody tr");
-});
-
-// Close dialog without doing anything
-addBookDialog.querySelector("[value='cancel']").addEventListener("click", () => {
+// Close "Add book" dialog without doing anything
+function closeAddDialog() {
     nameInput.required = false;
     authorInput.required = false;
     topicInput.required = false;
-});
+};
 
-// Clear input box after successful insertion
-addBookDialog.addEventListener("close", () => {
-    if (addBookDialog.returnValue === "create") {
-        nameInput.value = "";
-        authorInput.value = "";
-        topicInput.value = "";
+// Get data from input form and insert into table
+function addNewBook() {
+    if (nameInput.value !== "" && authorInput.value !== "" && topicInput.value !== "") {
+        customInsertRow(nameInput.value, authorInput.value, topicInput.value);
+
+        // Update data in localStorage
+        localData.push([nameInput.value, authorInput.value, topicInput.value]);
+        localStorage.setItem("bookList", JSON.stringify(localData));
     }
-});
+    // Update list
+    bookList = table.querySelectorAll("tbody tr");
+};
 
-// Set event for "delete" action
-table.addEventListener("click", (e) => {
-    const clickedElement = e.target;
-    if (clickedElement.tagName === "TD" && clickedElement.className === "action") {
-        deleteElement = clickedElement.parentElement;
-        const bookName = deleteElement.querySelector(".name").textContent;
-        deleteDialog.showModal();
-        deleteDialog.querySelector(".dialog-content b").textContent = bookName;
-    }
-    console.log(bookList);
-});
-
-// Delete a row from table
-deleteDialog.querySelector("[value='delete']").addEventListener("click", () => {
+// Delete selected row from table
+function deleteBook() {
     table.querySelector("tbody").removeChild(deleteElement);
-});
+    
+    // Update data in localStorage
+    const bookName = deleteElement.querySelector(".name").textContent;
+    localData = localData.filter(e => e[0] !== bookName);
+    localStorage.setItem("bookList", JSON.stringify(localData));
+};
 
+// Insert new row to table
+function customInsertRow(name, author, topic) {
+    let row = table.querySelector("tbody").insertRow(-1);
+
+    let nameCell = row.insertCell(0);
+    let authorCell = row.insertCell(1);
+    let topicCell = row.insertCell(2);
+    let actionCell = row.insertCell(3);
+
+    nameCell.innerHTML = name;
+    authorCell.innerHTML = author;
+    topicCell.innerHTML = topic;
+    actionCell.innerHTML = "Delete";
+
+    nameCell.classList.add("name");
+    actionCell.classList.add("action");
+}
 

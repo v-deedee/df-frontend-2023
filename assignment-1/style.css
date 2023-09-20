@@ -180,12 +180,18 @@ dialog {
   }
 }
 
-@media (max-width: 325px) {
+@media (max-width: 400px) {
   html {
-    font-size: 12px;
+    font-size: 13px;
   }
   body {
     padding: 0;
+  }
+}
+
+@media (max-width: 325px) {
+  html {
+    font-size: 12px;
   }
   table .name {
     width: 25%;
@@ -195,7 +201,10 @@ dialog {
   }
 }
 
-@media (max-width: 280px) {
+@media (max-width: 300px) {
+  html {
+    font-size: 10px;
+  }
   td {
     overflow-wrap: anywhere;
   }
