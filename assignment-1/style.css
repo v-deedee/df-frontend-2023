@@ -9,7 +9,26 @@ html {
 }
 
 body {
-  padding: 0 20px;
+  margin: 0;
+  background: #f2f2f2;
+}
+
+header {
+  padding: 10px 30px;
+  background: #FFFFFF;
+}
+
+header h1 {
+  margin: 0;
+}
+
+hr {
+  border: 1px solid #b1b1b1;
+  margin: 0;
+}
+
+main {
+  padding: 30px;
 }
 
 /* Classes applied to all buttons */
@@ -71,12 +90,14 @@ tr > * {
 
 th {
   text-align: left;
+  background: #d8d8838a;
 }
 
 table {
   margin-top: 10px;
   border-collapse: collapse;
   width: 100%;
+  background: #FFFFFF;
 }
 
 table .name {
@@ -93,6 +114,16 @@ table .action:hover {
   cursor: pointer;
 }
 
+#notification {
+  display: none;
+  margin: 0;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: #e7e6e6;
+  color: #f40808;
+}
 
 dialog {
   width: 400px;
@@ -147,6 +178,12 @@ dialog {
   dialog {
     width: 350px;
   }
+  header {
+    padding: 10px 20px;
+  }
+  main {
+    padding: 30px 20px;
+  }
   #search-box {
     width: 40%;
   }
@@ -156,8 +193,11 @@ dialog {
   html {
     font-size: 14px;
   }
-  body {
-    padding: 0 10px;
+  header {
+    padding: 10px 10px;
+  }
+  main {
+    padding: 30px 10px;
   }
   #search-box {
     width: 75%;
@@ -184,14 +224,17 @@ dialog {
   html {
     font-size: 13px;
   }
-  body {
-    padding: 0;
-  }
 }
 
 @media (max-width: 325px) {
   html {
     font-size: 12px;
+  }
+  header {
+    padding: 10px 5px;
+  }
+  main {
+    padding: 30px 5px;
   }
   table .name {
     width: 25%;

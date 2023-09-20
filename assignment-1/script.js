@@ -17,6 +17,9 @@ let deleteElement;
 // Store a list of book for searching and displaying on screen
 let bookList;
 
+// A boolean variable store the state of searching
+let exist;
+
 const sampleData = [
     ["Harry Potter", "J.K.Rowling", "Magic"],
     ["The lord of the rings", "J.R.R.Tolkien", "Fantasy"],
@@ -76,11 +79,13 @@ table.addEventListener("click", (e) => {
 // Perform searching when users input keyword into search box
 function search() {
     const key = seachBox.value;
+    exist = false;
     if (key !== "") {
         bookList.forEach(book => {
             const title = book.querySelector(".name").textContent;
             if (title.toLowerCase().includes(key.toLowerCase()) || title.toUpperCase().includes(key.toUpperCase())) {
                 book.style.display = "table-row";
+                exist = true;
             } else {
                 book.style.display = "none";
             }
@@ -89,7 +94,11 @@ function search() {
         bookList.forEach(book => {
             book.style.display = "table-row";
         });
+        exist = true;
     }
+    // Show notification if search-key exists or not
+    if (exist) document.getElementById("notification").style.display = "none";
+    else document.getElementById("notification").style.display = "block";
 };
 
 // Show "Add book" dialog when users click "Add book" button
@@ -119,11 +128,16 @@ function addNewBook() {
     }
     // Update list
     bookList = table.querySelectorAll("tbody tr");
+    // Update notification
+    search();
 };
 
 // Delete selected row from table
 function deleteBook() {
     table.querySelector("tbody").removeChild(deleteElement);
+    // Update notification
+    bookList = table.querySelectorAll("tbody tr");
+    search();
     
     // Update data in localStorage
     const bookName = deleteElement.querySelector(".name").textContent;
