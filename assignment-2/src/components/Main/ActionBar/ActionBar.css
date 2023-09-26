@@ -1,0 +1,28 @@
+#action-bar {
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+}
+
+#search-box {
+  width: 25%;
+  padding: 9px;
+  border: 2px solid #b1b1b1;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  #search-box {
+    width: 40%;
+  }
+}
+
+@media (max-width: 576px) {
+  #search-box {
+    width: 75%;
+  }
+  #add-button {
+    width: 25%;
+    padding: 6px;
+  }
+}

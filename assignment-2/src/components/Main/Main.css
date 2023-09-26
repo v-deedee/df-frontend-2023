@@ -1,0 +1,39 @@
+main {
+  padding: 30px;
+}
+
+/* Classes applied to all buttons */
+.custom-button {
+  padding: 9px 15px;
+  border: none;
+  border-radius: 3px;
+  background: #58adb8;
+  color: #FFFFFF;
+  font-weight: 700;
+  opacity: 1;
+}
+
+.custom-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  color: #000000;
+}
+/*---*/
+
+@media (max-width: 768px) {
+  main {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  main {
+    padding: 30px 10px;
+  }
+}
+
+@media (max-width: 325px) {
+  main {
+    padding: 30px 5px;
+  }
+}

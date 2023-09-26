@@ -1,0 +1,73 @@
+dialog {
+  width: 400px;
+  text-align: center;
+  border-color: #b1b1b1;
+}
+
+.dialog-title {
+  margin: 0;
+}
+
+.dialog-content {
+  padding: 20px 40px;
+}
+
+.confirm-button {
+  background: #D54747;
+  margin-left: 5px;
+}
+
+.input-box {
+  text-align: left;
+  padding: 10px;
+}
+
+.input-box label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.input-box input {
+  width: 100%;
+  display: block;
+  padding: 8px;
+  border: 2px solid #b1b1b1;
+  border-radius: 3px;
+}
+
+#add-box .dialog-title {
+  margin-bottom: 20px;
+  padding: 10px;
+  text-align: left;
+}
+
+#add-box .button-group {
+  margin: 20px;
+  text-align: right;
+}
+
+
+@media (max-width: 768px) {
+  dialog {
+    width: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  dialog {
+    width: 300px;
+  }
+  #add-box .dialog-title {
+    margin: 0;
+  }
+  #add-box .button-group {
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 325px) {
+  dialog {
+    padding: 5px;
+  }
+}

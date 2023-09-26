@@ -1,0 +1,39 @@
+#pagination {
+  text-align: center;
+  padding: 20px 5px;
+}
+
+#pagination button {
+  width: 30px;
+  height: 30px;
+  margin: 0 2px;
+  padding: 6px;
+  background: #FFFFFF;
+  border: 2px solid #b1b1b1;
+  border-radius: 3px;
+  font-weight: 700;
+  opacity: 1;
+}
+
+#pagination button:hover {
+  cursor: pointer;
+  background: #d68484;
+}
+
+#pagination .active {
+  background: #d68484;
+}
+
+#pagination .disabled:hover {
+  cursor: auto;
+  background: #FFFFFF;
+}
+
+@media (max-width: 400px) {
+  #pagination button {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    font-size: 1rem;
+  }
+}

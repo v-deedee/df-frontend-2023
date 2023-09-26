@@ -1,0 +1,43 @@
+table,
+tr > * {
+  border: 2px solid #b1b1b1;
+  padding: 8px;
+}
+
+th {
+  text-align: left;
+  background: #d8d8838a;
+}
+
+table {
+  margin-top: 10px;
+  border-collapse: collapse;
+  width: 100%;
+  background: #FFFFFF;
+}
+
+table .name {
+  width: 45%;
+}
+
+table .action {
+  color: #ff0000;
+  text-decoration: underline;
+}
+
+table .action:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media (max-width: 325px) {
+  table .name {
+    width: 25%;
+  }
+}
+
+@media (max-width: 300px) {
+  td {
+    overflow-wrap: anywhere;
+  }
+}
