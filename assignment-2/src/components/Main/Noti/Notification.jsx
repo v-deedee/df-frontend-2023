@@ -2,7 +2,7 @@ import './Notification.css';
 
 function Notification() {
   return (
-    <p id='notification'>Nothing match your search</p>
+    <p id='notification'>No books match your search</p>
   );
 }
 
