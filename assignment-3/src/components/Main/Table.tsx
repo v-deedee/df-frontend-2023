@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import DelBookDialog from './Modals/DelBookModal';
+import DelBookDialog from './modals/DelBookModal';
 import Pagination from './Pagination';
 import Notification from './Notification';
 import { BookInfo } from '../../SampleData';

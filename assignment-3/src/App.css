@@ -1,5 +1,40 @@
+:root {
+  --text-color: #000000;
+
+  --body-color: #f2f2f2;
+
+  --header-color: #ffffff;
+
+  --table-color: #ffffff;
+
+  --pagi-color: #ffffff;
+
+  --action-color: #ff0000;
+
+  --input-background: #ffffff;
+}
+
+[data-theme='dark'] {
+  --text-color: #d6d6d6;
+
+  --body-color: #2c2c2c;
+
+  --header-color: #383838;
+
+  --table-color: #232323;
+
+  --pagi-color: #252525;
+
+  --action-color: #ff8d8d;
+
+  --input-background: #e5e5e5;
+
+  --input-color: #000000;
+}
+
 * {
   box-sizing: border-box;
+  color: var(--text-color);
 }
 
 html {
@@ -10,16 +45,81 @@ html {
 
 body {
   margin: 0;
-  background: #f2f2f2;
+  background: var(--body-color);
 }
 
 header {
   padding: 10px 30px;
-  background: #FFFFFF;
+  background: var(--header-color);
+  display: flex;
+  justify-content: space-between;
 }
 
 header h1 {
   margin: 0;
+  background: var(--header-color);
+}
+
+#toggle-box {
+  background: none;
+  height: fit-content;
+  margin-top: 12px;
+}
+
+#toggle-box p {
+  display: inline;
+  background: none;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 25px;
+  background: none;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #afc5c8;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3.5px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #d76666;
+}
+
+input:checked + .slider:before {
+  transform: translateX(19px);
 }
 
 hr {
@@ -29,6 +129,11 @@ hr {
 
 main {
   padding: 30px;
+}
+
+input {
+  background: var(--input-background);
+  color: var(--input-color)
 }
 
 /* Classes applied to all buttons */
@@ -68,18 +173,18 @@ table,
 tr > * {
   border: 2px solid #b1b1b1;
   padding: 8px;
+  background: var(--table-color);
 }
 
 th {
   text-align: left;
-  background: #d8d8838a;
+  background: #5c8b948a;
 }
 
 table {
   margin-top: 10px;
   border-collapse: collapse;
   width: 100%;
-  background: #FFFFFF;
 }
 
 table .name {
@@ -87,7 +192,7 @@ table .name {
 }
 
 table .action {
-  color: #ff0000;
+  color: var(--action-color);
   text-decoration: underline;
 }
 
@@ -124,7 +229,7 @@ table .action:hover {
   height: 30px;
   margin: 0 2px;
   padding: 6px;
-  background: #FFFFFF;
+  background: var(--pagi-color);
   border: 2px solid #b1b1b1;
   border-radius: 3px;
   font-weight: 700;
@@ -140,9 +245,13 @@ table .action:hover {
   background: #d68484;
 }
 
+#pagination .disabled {
+  opacity: 0.4;
+}
+
 #pagination .disabled:hover {
   cursor: not-allowed;
-  background: #FFFFFF;
+  background: var(--pagi-color);
 }
 
 
@@ -150,6 +259,11 @@ dialog {
   width: 400px;
   text-align: center;
   border-color: #b1b1b1;
+  background: var(--body-color);
+}
+
+dialog:-internal-dialog-in-top-layer::backdrop {
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .dialog-title {

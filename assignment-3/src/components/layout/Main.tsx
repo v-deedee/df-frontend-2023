@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import ActionBar from './Main/ActionBar';
-import Table from './Main/Table';
-import { sampleData, BookInfo } from '../SampleData';
+import ActionBar from '../main/ActionBar';
+import Table from '../main/Table';
+import { sampleData, BookInfo } from '../../SampleData';
 
 const Main = () => {
   // Initialize book list

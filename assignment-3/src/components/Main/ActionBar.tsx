@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AddBookModal from './Modals/AddBookModal';
+import AddBookModal from './modals/AddBookModal';
 
 interface ActionBarProps {
   addBook: (info: { name: string; author: string; topic: string; }) => void,
