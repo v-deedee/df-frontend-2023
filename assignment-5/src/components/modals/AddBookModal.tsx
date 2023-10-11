@@ -1,5 +1,8 @@
-import { useRef, useEffect, useState } from 'react'
-import { BookInfo } from '../../sampleData'
+import { useRef, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { BookInfo, topics } from '../../sampleData'
 
 interface AddModalProps {
   isOpen: boolean
@@ -12,46 +15,42 @@ const AddBookModal: React.FC<AddModalProps> = ({
   closeModal,
   addBook,
 }) => {
-  const [input, setInput] = useState({ name: '', author: '', topic: '' })
+  const AddModalSchema = z.object({
+    name: z
+      .string()
+      .min(1, 'Please enter book name')
+      .min(5, 'Book name must have at least 5 characters'),
+    author: z
+      .string()
+      .min(1, 'Please enter author name')
+      .regex(/^[A-Za-z ]+$/, 'Author name contains only letters and spaces'),
+    topic: z.string().min(1, 'Please select book topic'),
+  })
+
+  type AddModalSchemaType = z.infer<typeof AddModalSchema>
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<AddModalSchemaType>({
+    resolver: zodResolver(AddModalSchema),
+  })
 
   const modalRef = useRef<HTMLDialogElement | null>(null)
 
-  // Prevent closing modal on pressing 'Enter'
+  // Prevent closing modal on pressing 'Esc'
   const preventClose = (event: React.KeyboardEvent<HTMLDialogElement>) => {
-    if (event.key === 'Enter' || event.key === 'Escape') {
+    if (event.key === 'Escape') {
       event.preventDefault()
     }
   }
 
-  const handleCloseModal = (event: React.FormEvent<HTMLButtonElement>) => {
-    event.preventDefault()
+  const onSubmit = (data: AddModalSchemaType) => {
+    addBook(data)
+    reset()
     closeModal()
-  }
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.currentTarget
-
-    setInput((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      }
-    })
-  }
-
-  const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    if (input.name === '') {
-      alert('Please enter book name')
-    } else if (input.author === '') {
-      alert('Please enter author name')
-    } else if (input.topic === '') {
-      alert('Please enter book topic')
-    } else {
-      addBook(input)
-      setInput({ name: '', author: '', topic: '' })
-      closeModal()
-    }
   }
 
   useEffect(() => {
@@ -74,58 +73,78 @@ const AddBookModal: React.FC<AddModalProps> = ({
       role="presentation"
     >
       <h2 className="p-2 sm:p-3 text-xl sm:text-2xl font-bold">Add book</h2>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="px-2 py-1 sm:p-3">
           <label htmlFor="name-input" className="text-sm font-bold">
             Name
             <input
+              className={`block w-full p-1.5 sm:p-2 font-normal border-2 border-solid border-gray-500 ${
+                errors.name && 'border-red-500 outline-0'
+              } rounded dark:bg-neutral-100 dark:text-black`}
               id="name-input"
-              className="block w-full p-1.5 sm:p-2 font-normal border-2 border-solid border-gray-500 rounded dark:bg-neutral-100 dark:text-black"
-              name="name"
               placeholder="Enter book name"
-              onChange={handleInputChange}
-              value={input.name}
+              {...register('name')}
             />
+            {errors.name && (
+              <p className="text-red-500 dark:text-red-400">
+                {errors.name.message}
+              </p>
+            )}
           </label>
         </div>
         <div className="px-2 py-1 sm:p-3">
           <label htmlFor="author-input" className="text-sm font-bold">
             Author
             <input
+              className={`block w-full p-1.5 sm:p-2 font-normal border-2 border-solid border-gray-500 ${
+                errors.author && 'border-red-500 outline-0'
+              } rounded dark:bg-neutral-100 dark:text-black`}
               id="author-input"
-              className="block w-full p-1.5 sm:p-2 font-normal border-2 border-solid border-gray-500 rounded dark:bg-neutral-100 dark:text-black"
-              name="author"
               placeholder="Enter author name"
-              onChange={handleInputChange}
-              value={input.author}
+              {...register('author')}
             />
+            {errors.author && (
+              <p className="text-red-500 dark:text-red-400">
+                {errors.author.message}
+              </p>
+            )}
           </label>
         </div>
         <div className="px-2 py-1 sm:p-3">
           <label htmlFor="topic-input" className="text-sm font-bold">
             Topic
-            <input
+            <select
+              className={`block w-full p-1.5 sm:p-2 font-normal border-2 border-solid border-gray-500 ${
+                errors.topic && 'border-red-500 outline-0'
+              } rounded dark:bg-neutral-100 dark:text-black`}
               id="topic-input"
-              className="block w-full p-1.5 sm:p-2 font-normal border-2 border-solid border-gray-500 rounded dark:bg-neutral-100 dark:text-black"
-              name="topic"
-              placeholder="Enter book topic"
-              onChange={handleInputChange}
-              value={input.topic}
-            />
+              {...register('topic')}
+            >
+              <option value="">Select topic</option>
+              {topics.map((topic, index) => (
+                <option key={index} value={topic}>
+                  {topic}
+                </option>
+              ))}
+            </select>
+            {errors.topic && (
+              <p className="text-red-500 dark:text-red-400">
+                {errors.topic.message}
+              </p>
+            )}
           </label>
         </div>
         <div className="flex justify-end gap-2 p-3">
           <button
-            value="cancel"
             className="py-2 px-4 border-none rounded bg-cyan-500 text-white text-sm font-bold hover:opacity-70 hover:text-black"
-            onClick={handleCloseModal}
+            type="button"
+            onClick={() => closeModal()}
           >
             Cancel
           </button>
           <button
-            value="create"
             className="py-2 px-4 border-none rounded bg-red-400 text-white text-sm font-bold hover:opacity-70 hover:text-black"
-            onClick={handleSubmit}
+            type="submit"
           >
             Create
           </button>

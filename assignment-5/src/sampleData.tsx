@@ -132,3 +132,24 @@ export const sampleData: Array<BookInfo> = [
     topic: 'Historical novel',
   },
 ]
+
+export const topics = [
+  'Detective',
+  'Fantasy',
+  'Adventure',
+  'Fiction',
+  'Non-fiction',
+  'Novel',
+  'Romance',
+  'Self-help',
+  'Text-books',
+  'Academic',
+  'Mystery',
+  'Thrillers',
+  'History',
+  'Art',
+  'Biography',
+  'Cook',
+  'Science',
+  'Travel',
+]

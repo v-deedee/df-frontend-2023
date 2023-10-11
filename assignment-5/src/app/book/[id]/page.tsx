@@ -16,7 +16,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const localData = localStorage.getItem('books')
     bookList = localData === null ? [...sampleData] : JSON.parse(localData)
   } catch (error) {
-    console.error('error')
+    console.error('Failed to load local book list')
   }
   const index = bookList.findIndex((book) => book.id === Number(params.id))
 
@@ -48,6 +48,20 @@ export default function Page({ params }: { params: { id: string } }) {
     localStorage.setItem('books', JSON.stringify(newList))
     setBooks(newList)
     router.push(`/home/?q=${searchKey}`)
+  }
+
+  let current_page = 1
+  const localPage = localStorage.getItem('page')
+  try {
+    current_page = localPage === null ? 1 : JSON.parse(localPage)
+  } catch (error) {
+    console.error('Failed to load local page')
+  }
+
+  const handleNoBookPage = () => {
+    if (books.length % 5 === 1 && current_page === (books.length - 1) / 5 + 1) {
+      localStorage.setItem('page', JSON.stringify(current_page - 1))
+    }
   }
   return (
     <>
@@ -93,7 +107,7 @@ export default function Page({ params }: { params: { id: string } }) {
               closeModal={closeModal}
               selectedBook={selectedBook}
               deleteBook={deleteBook}
-              handleNoBookPage={() => {}}
+              handleNoBookPage={handleNoBookPage}
             />
           </div>
         )}
