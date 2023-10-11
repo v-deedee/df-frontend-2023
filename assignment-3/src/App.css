@@ -35,6 +35,7 @@
 * {
   box-sizing: border-box;
   color: var(--text-color);
+  /* transition: all .3s ease-in-out; */
 }
 
 html {
