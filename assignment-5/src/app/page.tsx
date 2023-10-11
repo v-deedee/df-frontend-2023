@@ -43,7 +43,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<TSignInSchema>({
     resolver: zodResolver(signInSchema),
   })
@@ -113,7 +113,6 @@ export default function Login() {
           </label>
           <button
             type="submit"
-            disabled={isSubmitting}
             className="w-full mb-8 py-2 px-4 text-center border-none rounded bg-cyan-500 text-white text-sm font-bold hover:opacity-70 hover:text-black disabled:opacity-40 disabled:hover:text-white"
           >
             Login
